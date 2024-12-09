@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import { CiSearch } from "react-icons/ci";
-import { CiShoppingCart } from "react-icons/ci";
-import { PiUserCircleLight } from "react-icons/pi";
+import { IoSearch } from "react-icons/io5";
+import { BsCart2 } from "react-icons/bs";
+import { AiOutlineUser } from "react-icons/ai";
 import Link from "next/link";
+import { FaBars } from "react-icons/fa";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  console.log(isMobileMenuOpen)
   return (
     <div className="bg-white max-w-[1270px] mx-auto px-4">
       <div className="flex justify-between items-center py-5">
@@ -21,29 +22,30 @@ const Navbar = () => {
                 <Link href="/">Home</Link>
               </li>
               <li>
-                <Link href={"/about"}>About us</Link>
+                <Link href="/about">About us</Link>
               </li>
               <li>
-                <Link href={"/product"}>Product</Link>
+                <Link href="/product">Product</Link>
               </li>
               <li className="mr-2">
                 <Link href="#">Blog</Link>
               </li>
             </ul>
           </nav>
-          <span>
-            <CiSearch size={24} />
+          <span className="cursor-pointer ml-4">
+            <IoSearch size={24} />
           </span>
-          <span>
-            <CiShoppingCart size={24} />
+          <span className="cursor-pointer ml-4">
+          <BsCart2  size={24} />
           </span>
-          <span className="ps-3">
-            <PiUserCircleLight size={24} />
+          <span className="cursor-pointer ml-4">
+          <AiOutlineUser size={24} />
           </span>
           <button
             className="lg:hidden ml-4 text-xl"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            {isMobileMenuOpen ? "✖" : "☰"}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <FaBars size={24} />
           </button>
         </div>
       </div>
