@@ -1,4 +1,4 @@
-import Link from "next/link";
+
 import Image from "next/image";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaCanadianMapleLeaf, FaRegCheckCircle } from "react-icons/fa";
@@ -7,59 +7,42 @@ import { PiDeviceMobile } from "react-icons/pi";
 const About = () => {
   return (
     <div className="max-w-[1440px] mx-auto">
-      {/* Hero Section */}
-      <div className="w-full flex justify-center items-center px-4">
-        <div className="w-full max-w-[1250px] flex lg:flex-row flex-col lg:gap-0 gap-[40px] items-center justify-between mt-[88px] lg:mb-[89px] mb-[32px]">
-          <h1 className="text-[36px] text-pink-600">
-            A brand built on the love of craftmanship,
-            <br />
-            quality and outstanding customer service
-          </h1>
-          <Link href="/">
-            <button className="flex justify-center items-center lg:w-[192px] w-full h-[56px] text-[#2A254B] bg-orange-500">
-              View collection
-            </button>
-          </Link>
+    
+    <div className="w-full flex justify-center items-center px-4">
+  <div className="max-w-[1250px] w-full mx-auto flex lg:flex-row flex-col lg:gap-0 gap-[40px] items-center justify-between mt-[88px] lg:mb-[89px] mb-[32px]">
+    <h1 className="text-4xl lg:text-left py-10 text-center  leading-relaxed">
+      A brand built on the love of craftsmanship,<br/> quality, and outstanding customer service
+    </h1>
+          <button className=" text-[#2A254B] bg-[#F9F9F9] rounded  py-4 hover:bg-[#CAC6DA]  sm:w-[30%]">
+       View Our Products
+          </button>
+  </div>
+</div>
+
+
+      <div className="w-full flex justify-center px-4  lg:py-[60px] pb-[32px]">
+        <div className="w-full  flex lg:flex-row lg:gap-4 gap-6 flex-col justify-center">
+        <div className=" flex flex-col justify-around text-center p-4 bg-[#2A254B] w-full lg:w-[55%] ">
+        <div className="">
+          <h2 className="text-white text-4xl mt-10 ">
+          It started with a small idea
+          </h2>
+          <p className="text-white  text-lg sm:mt-10 mb-10">
+          A global brand with local beginnings, our story begain in a <br />small studio in South London in early 2014
+            
+          </p>
+          
+        </div>
+
+        <div className="w-full hidden lg:block  ">
+        <button className="bg-[#494365] mt-10 text-white font-medium px-8 py-4 rounded opacity-75">
+            View collection
+          </button>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* Sofa Section */}
-      <div className="w-full flex justify-center px-4 lg:py-[60px] pb-[32px]">
-        <div className="w-full  flex lg:flex-row lg:gap-4 gap-6 flex-col justify-center">
-          <div className="bg-[#2a254b] text-pink-300 flex flex-col justify-between w-full lg:basis-[50%] p-[40px_32px_30px_32px] lg:p-[60px_0px_60px_60px]">
-            <div>
-              <h1 className="md:text-[32px] text-[20px] mb-3">
-                It started with a small idea
-              </h1>
-              <p className="lg:pr-[75px] md:text-[18px] text-[14px]">
-                A global brand with local beginnings, our story began in a small
-                studio in South London in early 2014.
-              </p>
-            </div>
-            <div className="text-[#2A254B]">
-              <Link href="/">
-                <button className="flex justify-center items-center md:w-[170px] mt-[32px] h-[56px] w-full">
-                  View collection
-                </button>
-              </Link>
-            </div>
-          </div>
           <div className="flex-1">
             <Image
-              src="/images/abt1.png"
+              src="/images/about1.png"
               alt="Sofa Image"
               width={630}
               height={478}
@@ -106,9 +89,6 @@ const About = () => {
         />
       </div>
     </div>
-
-
-      {/* What Makes Us Different */}
       <div className="w-full flex justify-center px-4 text-[#2A254B]">
         <div className="w-full max-w-7xl text-darkPurple pt-[60px] pb-[80px]">
           <h1 className="sm:text-center text-left text-3xl mb-[51px]">
