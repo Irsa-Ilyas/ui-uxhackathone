@@ -14,7 +14,7 @@ const Ceramic = () => {
           { src: "/images/chair3.png", name: "The Silky Vase", price: "£125" },
           { src: "/images/chair4.png", name: "The Lucy Lamp", price: "£399" },
         ].map((item, index) => (
-          <div key={index} className="flex flex-col items-center">
+          <div key={index} className="flex flex-col rounded overflow-hidden">
             <Image
               src={item.src}
               width={305}
@@ -22,8 +22,8 @@ const Ceramic = () => {
               alt={item.name}
               className="rounded"
             />
-            <div className="py-5 text-[#2A254B] text-center">
-              <p className="text-lg sm:text-xl">{item.name}</p>
+            <div className="py-5 text-[#2A254B] text-left">
+              <p className="text-xl ">{item.name}</p>
               <p className="text-base sm:text-lg pt-2">{item.price}</p>
             </div>
           </div>

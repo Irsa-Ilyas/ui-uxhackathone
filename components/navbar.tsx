@@ -3,111 +3,181 @@ import React, { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { BsCart2 } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
+import { IoIosMenu, IoIosClose } from "react-icons/io";
 import Link from "next/link";
-import { FaBars } from "react-icons/fa";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  console.log(isMobileMenuOpen)
+  const [isMobileSubMenuOpen, setIsMobileSubMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    if (isMobileSubMenuOpen) setIsMobileSubMenuOpen(false);
+  };
+
   return (
-    <div className="bg-white max-w-[1270px] mx-auto px-4">
-      <div className="flex justify-between items-center py-5">
-        <div>
-          <h1 className="text-[#22202E] text-2xl font-bold">Avion</h1>
-        </div>
-        <div className="flex items-center text-base text-[#726E8D]">
-          <nav className="hidden lg:flex">
-            <ul className="flex gap-6">
+    <header className="shadow-sm overflow-x-hidden">
+      <div className="max-w-[1270px] mx-auto px-4">
+        <div className="flex items-center justify-between py-4">
+          <IoSearch size={24} className="" />
+
+          <h1 className="text-[#2A254B] text-xl font-bold">Avion</h1>
+
+          <div className="hidden lg:block">
+            <ul className="flex gap-6 items-center">
               <li>
                 <Link href="/">Home</Link>
               </li>
               <li>
-                <Link href="/about">About us</Link>
+                <Link href="/about">About</Link>
               </li>
               <li>
                 <Link href="/product">Product</Link>
               </li>
-              <li className="mr-2">
-                <Link href="#">Blog</Link>
+              <li>
+                <Link href="/contact">Contact</Link>
+              </li>
+              <li>
+                <BsCart2 size={24} className="text-[#726E8D]" />
+              </li>
+              <li>
+                <AiOutlineUser size={24} className="text-[#726E8D]" />
               </li>
             </ul>
-          </nav>
-          <span className="cursor-pointer ml-4">
-            <IoSearch size={24} />
-          </span>
-          <span className="cursor-pointer ml-4">
-          <BsCart2  size={24} />
-          </span>
-          <span className="cursor-pointer ml-4">
-          <AiOutlineUser size={24} />
-          </span>
-          <button
-            className="lg:hidden ml-4 text-xl"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            <FaBars size={24} />
-          </button>
-        </div>
-      </div>
-      <hr />
+          </div>
 
-      <div className="hidden lg:flex lg:justify-center py-5 text-base text-[#726E8D]">
-        <nav>
-          <ul className="flex gap-11">
+          <div className="lg:hidden flex items-center gap-4">
+            {!isMobileMenuOpen && !isMobileSubMenuOpen ? (
+              <IoIosMenu
+                size={24}
+                className="text-[#726E8D] cursor-pointer"
+                onClick={toggleMobileMenu}
+              />
+            ) : (
+              <IoIosClose
+                size={24}
+                className="text-[#726E8D] cursor-pointer"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsMobileSubMenuOpen(false);
+                }}
+              />
+            )}
+          </div>
+        </div>
+
+        {isMobileMenuOpen && (
+          <div className="lg:hidden bg-white shadow-md">
+            <ul className="flex flex-col gap-4 py-4 px-4">
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              <li>
+                <Link href="/about">About</Link>
+              </li>
+              <li>
+                <Link href="/product">Product</Link>
+              </li>
+              <li>
+                <Link href="/contact">Contact</Link>
+              </li>
+              <li>
+                <BsCart2 size={24} />
+              </li>
+              <li>
+                <AiOutlineUser size={24} />
+              </li>
+              <li></li>
+            </ul>
+          </div>
+        )}
+
+        {isMobileSubMenuOpen && (
+          <div className="lg:hidden bg-white shadow-md">
+            <ul className="flex flex-col gap-4 py-4 px-4">
+              <li>
+                <Link href="#" className="">
+                  Plant Pots
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="">
+                  Ceramics
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="">
+                  Tables
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="">
+                  Chairs
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="">
+                  Crockery
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="">
+                  Tableware
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="">
+                  Cutlery
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <div className="hidden lg:block max-w-[1270px] mx-auto px-4">
+        <nav className="flex justify-center py-4">
+          <ul className="flex flex-wrap gap-6 text-sm text-[#726E8D]">
             <li>
-              <Link href="#">Plant pots</Link>
+              <Link href="#" className="">
+                Plant Pots
+              </Link>
             </li>
             <li>
-              <Link href="#">Ceramics</Link>
+              <Link href="#" className="">
+                Ceramics
+              </Link>
             </li>
             <li>
-              <Link href="#">Tables</Link>
+              <Link href="#" className="">
+                Tables
+              </Link>
             </li>
             <li>
-              <Link href="#">Chairs</Link>
+              <Link href="#" className="">
+                Chairs
+              </Link>
             </li>
             <li>
-              <Link href="#">Crockery</Link>
+              <Link href="#" className="">
+                Crockery
+              </Link>
             </li>
             <li>
-              <Link href="#">Tableware</Link>
+              <Link href="#" className="">
+                Tableware
+              </Link>
             </li>
             <li>
-              <Link href="#">Cutlery</Link>
+              <Link href="#" className="">
+                Cutlery
+              </Link>
             </li>
           </ul>
         </nav>
       </div>
-      {isMobileMenuOpen && (
-        <div className="lg:hidden bg-gray-50 py-5">
-          <nav>
-            <ul className="flex flex-col gap-4 text-base text-[#726E8D]">
-              <li>
-                <Link href="#">Plant pots</Link>
-              </li>
-              <li>
-                <Link href="#">Ceramics</Link>
-              </li>
-              <li>
-                <Link href="#">Tables</Link>
-              </li>
-              <li>
-                <Link href="#">Chairs</Link>
-              </li>
-              <li>
-                <Link href="#">Crockery</Link>
-              </li>
-              <li>
-                <Link href="#">Tableware</Link>
-              </li>
-              <li>
-                <Link href="#">Cutlery</Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      )}
-    </div>
+      <hr className="border-b-1 border-black" />
+    </header>
   );
 };
 

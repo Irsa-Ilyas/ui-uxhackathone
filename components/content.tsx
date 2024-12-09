@@ -2,28 +2,33 @@ import React from "react";
 
 const Signupcontent = () => {
   return (
-    <div className="max-w-full overflow-x-hidden flex justify-center mx-auto bg-[#F9f9f9] mt-12">
-      <div className="bg-white p-12 text-center mb-16 w-full sm:w-auto">
-        <h1 className="text-4xl text-[#2A254B] mb-6">
-          Join the club and get the benefits
-        </h1>
-        <p className="font-medium text-[#2A254B] mb-12">
-          Sign up for our newsletter and receive exclusive offers on new <br />
-          ranges, sales, pop-up stores, and more.
+    <div className="w-full flex justify-center px-4  pt-[52px] pb-[65px] bg-[#F9F9F9]">
+    <div className="w-full max-w-7xl text-[#2A254B] bg-white pt-[52px] pb-[65px] px-4  ">
+      <div className="text-left sm:text-center">
+        <h1 className="text-4xl">Join the club and get the benefits</h1>
+        <p>
+          Sign up for our newsletter and receive exclusive offers on new
         </p>
+        <p>oranges, sales, pop up stores and more</p>
+      </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0">
+      <div className="flex justify-center mt-[72px] ">
+        <div className="flex  w-full max-w-[472px] h-[58px]">
           <input
             type="text"
-            placeholder="your@gmail.com"
-            className="px-4 py-3 w-full sm:w-96 bg-[#F9F9F9] text-[#2A254B] placeholder:ps-3 border border-gray-300 rounded-l-md focus:outline-none"
+            id="input-field"
+            placeholder="your@email.com"
+            className="px-4 py-2 border-none outline-none w-full text-lg text-[#2A254B] bg-[#F9F9F9]"
           />
-          <button className="px-6 py-3 bg-[#2A254B] text-white text-medium rounded-r-md hover:bg-[#1d1b34]">
+          <button className="text-white w-[118px]  bg-[#2A254B] h-[58px] flex justify-center items-center">
             Sign up
           </button>
         </div>
       </div>
+
+      <div />
     </div>
+  </div>
   );
 };
 
