@@ -82,7 +82,7 @@ const Navbar = () => {
                 <Link href="/contact">Contact</Link>
               </li>
               <li>
-                <BsCart2 size={24} />
+              <Link href="/cart"> <BsCart2 size={24} /></Link> 
               </li>
               <li>
                 <AiOutlineUser size={24} />
