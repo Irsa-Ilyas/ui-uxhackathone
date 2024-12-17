@@ -38,7 +38,7 @@ const Navbar = () => {
                 <Link href="/contact">Contact</Link>
               </li>
               <li>
-                <BsCart2 size={24} className="text-[#726E8D]" />
+              <Link href="/cart"><BsCart2 size={24} className="text-[#726E8D]"/></Link>
               </li>
               <li>
                 <AiOutlineUser size={24} className="text-[#726E8D]" />
@@ -79,15 +79,15 @@ const Navbar = () => {
                 <Link href="/product">Product</Link>
               </li>
               <li>
-                <Link href="/contact">Contact</Link>
+              <Link href="/contact">Contact</Link>
               </li>
               <li>
-              <Link href="/cart"> <BsCart2 size={24} /></Link> 
+              <Link href="/cart"><BsCart2 size={24}/></Link> 
               </li>
               <li>
                 <AiOutlineUser size={24} />
               </li>
-              <li></li>
+            
             </ul>
           </div>
         )}
