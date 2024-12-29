@@ -1,84 +1,101 @@
 import React from "react";
 import Image from "next/image";
+import Brand from "../../../components/brand";
+import Signupcontent from "../../../components/content";
 
 const Cart = () => {
   return (
-    <div className="bg-gray-200  max-w-[1440px] mx-auto  px-4 sm:px-10 lg:px-40 pt-10 pb-16 h-auto text-custom-purple">
-      <h1 className="text-2xl sm:text-3xl text-center lg:text-left font-bold">
-        Your Shopping Cart
+    <div>
+      <div className="flex flex-col md:flex-row justify-between text-[#2A254B] min-h-screen">
+        <div className="md:w-1/2 flex justify-center">
+          <Image
+            src="/images/chair1.png"
+            alt="The Dandy Chair"
+            width={720}
+            height={750}
+            className="h-auto object-cover"
+          />
+        </div>
+        <div className="md:w-1/2 px-6 md:px-20 py-10 flex flex-col justify-center">
+          <h1 className="text-4xl font-bold mb-5">The Dandy Chair</h1>
+          <p className="text-2xl font-semibold mb-8">£250</p>
+          <p className="text-lg font-medium mb-4">Description</p>
+          <p className="text-base leading-relaxed mb-6">
+            A timeless design, with premium materials featured as one of our
+            most popular and iconic pieces. The Dandy chair is perfect for any
+            stylish living space with both vegan and detailed leather
+            upholstery.
+          </p>
+          <ul className="list-disc ml-6 mb-8">
+            <li>Premium material</li>
+            <li>Handmade upholstery</li>
+            <li>Quality timeless interior</li>
+          </ul>
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold mb-4">Dimensions</h2>
+            <div className="grid grid-cols-3 gap-4">
+              <p className="leading-8">
+                <strong>Height:</strong> 110cm
+              </p>
+              <p className="leading-8">
+                <strong>Width:</strong> 75cm
+              </p>
+              <p className="leading-8">
+                <strong>Depth:</strong> 50cm
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center flex-wrap gap-4 mt-8 md:mt-16">
+            <label htmlFor="quantity" className="text-lg font-semibold">
+              Amount:
+            </label>
+            <input
+              type="number"
+              min="1"
+              defaultValue="1"
+              className="w-16 border rounded px-2 py-1 text-center"
+            />
+            <div className="flex justify-center">
+              <button className=" sm:w-auto px-6 py-3 sm:px-16 bg-[#2A254B] text-white rounded hover:bg-[#1e1b3a]">
+                Add to cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h1 className="text-3xl font-semibold text-center text-[#2A254B] py-5">
+        You May Also Like
       </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-10">
-       
-        <div className="border-2 p-4 rounded-md shadow-sm">
-          <h1 className="text-lg font-semibold">Product</h1>
-          <div className="flex items-start justify-between mt-8">
-            <div className="flex">
-              <Image
-                src="/images/basket.png"
-                alt="Product 1"
-                width={110}
-                height={135}
-                className="w-20 h-20 sm:w-28 sm:h-28 transition-transform duration-300 ease-in-out hover:scale-105 hover:translate-y-1"
-              />
-              <div className="ps-14">
-                <h1 className="text-green-600 bg-purple-500 text-base sm:text-lg font-medium ms-12">
-                  Graystone Vase
-                </h1>
-                <p className="text-sm mt-2">
-                  A timeless ceramic vase with a tri-color grey glaze.
-                </p>
-                <p className="mt-2 text-base font-semibold">£85</p>
-              </div>
-            </div>
-            <div className="flex flex-col items-center">
-              <h1 className="text-sm font-semibold hidden sm:block">Quantity</h1>
-              <p className="mt-2 text-lg font-medium">1</p>
-            </div>
-          </div>
 
-   
-          <div className="flex items-start justify-between mt-8">
-            <div className="flex">
-              <Image
-                src="/images/basket2.png"
-                alt="Product 2"
-                width={110}
-                height={135}
-                className="w-20 h-20 sm:w-28 sm:h-28 transition-transform duration-300 ease-in-out hover:scale-105 hover:translate-y-1"
-              />
-              <div className="ml-6">
-                <h1 className="text-base sm:text-lg font-medium">
-                  Basic White Vase
-                </h1>
-                <p className="text-sm mt-2">
-                  Beautiful and simple, this is one for the classics.
-                </p>
-                <p className="mt-2 text-base font-semibold">£85</p>
-              </div>
-            </div>
-         
-            <div className="flex flex-col items-center">
-              <h1 className="text-sm font-semibold hidden sm:block">Quantity</h1>
-              <p className="mt-2 text-lg font-medium">1</p>
+      <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6  py-6">
+        {[
+          "/images/chair1.png",
+          "/images/chair2.png",
+          "/images/chair3.png",
+          "/images/p3.png",
+        ].map((src, index) => (
+          <div key={index}>
+            <Image
+              src={src}
+              alt={`Product ${index + 1}`}
+              width={305}
+              height={375}
+              className="rounded object-cover w-full"
+            />
+            <div className="py-5 text-[#2A254B]">
+              <p className="text-lg font-medium">The Poplar suede sofa</p>
+              <p className="text-md pt-2 font-light">£980</p>
             </div>
           </div>
-        </div>
-           <div className="border-2 p-4 rounded-md shadow-sm hidden lg:block">
-          <h1 className="text-lg font-semibold">Total</h1>
-          <p className="mt-10 text-lg font-medium">£85</p>
-          <p className="mt-40 text-lg font-medium">£85</p>
-        </div>
-      </div>   
-      <div className="mt-10 text-center lg:text-right">
-        <h1 className="inline text-lg sm:text-xl font-medium mr-4">Subtotal</h1>
-        <h1 className="inline text-xl sm:text-2xl font-semibold">£210</h1>
-        <p className="text-sm mt-4">
-          Taxes and shipping are calculated at checkout.
-        </p>
-        <button className="bg-custom-purple h-12 sm:h-14 mt-6 w-full sm:w-56 rounded-md text-white font-semibold shadow-lg hover:bg-custom-purple-dark">
-          Go to checkout
+        ))}
+      </div>
+      <div className="w-full flex justify-center text-base text-[#2A254B] mt-8">
+        <button className="bg-[#F9F9F9] rounded px-8 py-4 hover:bg-[#CAC6DA]">
+          View Collection
         </button>
       </div>
+      <Brand />
+      <Signupcontent />
     </div>
   );
 };

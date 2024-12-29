@@ -12,19 +12,16 @@ const Signupcontent = () => {
         <p>oranges, sales, pop up stores and more</p>
       </div>
 
-      <div className="flex justify-center mt-[72px] ">
-        <div className="flex  w-full max-w-[472px] h-[58px]">
+      <div className="flex flex-col sm:flex-row items-center justify-center mt-6 sm:space-y-0">
           <input
             type="text"
-            id="input-field"
-            placeholder="your@email.com"
-            className="px-4 py-2 border-none outline-none w-full text-lg text-[#2A254B] bg-[#F9F9F9]"
+            placeholder="your@gmail.com"
+            className="px-4 py-3 w-full sm:w-96 bg-[#F9F9F9] text-[#2A254B] placeholder:ps-3 border border-gray-300 rounded-l-md focus:outline-none"
           />
-          <button className="text-white w-[118px]  bg-[#2A254B] h-[58px] flex justify-center items-center">
-            Sign up
+          <button className="px-6 py-3  bg-[#2A254B] text-white text-medium rounded-r-md hover:bg-[#1d1b34]">
+            Signup
           </button>
         </div>
-      </div>
 
       <div />
     </div>

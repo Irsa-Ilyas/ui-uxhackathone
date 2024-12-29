@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useState } from "react";
 import { IoSearch } from "react-icons/io5";
@@ -5,6 +6,7 @@ import { BsCart2 } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { IoIosMenu, IoIosClose } from "react-icons/io";
 import Link from "next/link";
+import { FaRegHeart } from "react-icons/fa6";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -35,11 +37,12 @@ const Navbar = () => {
                 <Link href="/product">Product</Link>
               </li>
               <li>
-                <Link href="/contact">Contact</Link>
-              </li>
-              <li>
               <Link href="/cart"><BsCart2 size={24} className="text-[#726E8D]"/></Link>
               </li>
+              <li>
+              <Link href="/favourite"><FaRegHeart  size={24} className="text-[#726E8D]"/></Link>
+              </li>
+              
               <li>
                 <AiOutlineUser size={24} className="text-[#726E8D]" />
               </li>
@@ -79,11 +82,12 @@ const Navbar = () => {
                 <Link href="/product">Product</Link>
               </li>
               <li>
-              <Link href="/contact">Contact</Link>
-              </li>
-              <li>
               <Link href="/cart"><BsCart2 size={24}/></Link> 
               </li>
+              <li>
+              <Link href="/favourite"><FaRegHeart  size={24}/></Link> 
+              </li>
+              
               <li>
                 <AiOutlineUser size={24} />
               </li>

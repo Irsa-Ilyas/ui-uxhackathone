@@ -9,12 +9,12 @@ export default function Home() {
         </h1>
       </header>
       <div className="container mx-auto py-8 px-4">
-        <div className="flex flex-wrap justify-between items-center mb-6 gap-4">
+        <div className="flex flex-wrap justify-between items-center  gap-4">
           <div className="flex gap-4 flex-wrap">
             {["Category", "Product Type", "Price", "Brand"].map((filter) => (
               <select
                 key={filter}
-                className="px-4 py-2 border rounded hover:bg-[#F9F9F9]">
+                className="px-4 py-2 border rounded hover:bg-[#F9F9F9] mb-8">
                 <option>{filter}</option>
               </select>
             ))}
@@ -26,7 +26,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
           {[
             "/images/chair1.png",
             "/images/chair2.png",

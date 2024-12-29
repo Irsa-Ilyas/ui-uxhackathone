@@ -3,6 +3,7 @@ import Image from "next/image";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaCanadianMapleLeaf, FaRegCheckCircle } from "react-icons/fa";
 import { PiDeviceMobile } from "react-icons/pi";
+import Signupcontent from "../../../components/content";
 
 const About = () => {
   return (
@@ -13,7 +14,7 @@ const About = () => {
     <h1 className="text-4xl lg:text-left py-10 text-center  leading-relaxed">
       A brand built on the love of craftsmanship,<br/> quality, and outstanding customer service
     </h1>
-          <button className=" text-[#2A254B] bg-[#F9F9F9] rounded  py-4 hover:bg-[#CAC6DA]  sm:w-[30%]">
+          <button className=" text-[#2A254B] bg-[#F9F9F9] rounded  py-4 hover:bg-[#CAC6DA] px-8 mb-4">
        View Our Products
           </button>
   </div>
@@ -146,34 +147,9 @@ const About = () => {
         </div>
       </div>
 
-
-      <div className="w-full flex justify-center px-4  pt-[52px] pb-[65px] bg-[#F9F9F9]">
-    <div className="w-full max-w-7xl text-[#2A254B] bg-white pt-[52px] pb-[65px] px-4  ">
-      <div className="text-left sm:text-center">
-        <h1 className="text-4xl">Join the club and get the benefits</h1>
-        <p>
-          Sign up for our newsletter and receive exclusive offers on new
-        </p>
-        <p>oranges, sales, pop up stores and more</p>
-      </div>
-
-      <div className="flex justify-center mt-[72px] ">
-        <div className="flex  w-full max-w-[472px] h-[58px]">
-          <input
-            type="text"
-            id="input-field"
-            placeholder="your@email.com"
-            className="px-4 py-2 border-none outline-none w-full text-lg text-[#2A254B] bg-[#F9F9F9]"
-          />
-          <button className="text-white w-[118px]  bg-[#2A254B] h-[58px] flex justify-center items-center">
-            Sign up
-          </button>
-        </div>
-      </div>
-
+{/*  */}
+<Signupcontent/>
       <div />
-    </div>
-  </div>
     </div>
   );
 };
