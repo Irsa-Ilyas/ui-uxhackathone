@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
+import { CartProvider } from "@/context/Context";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,10 +28,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const newLocal = <body
+
     className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[1440px] mx-auto`}>
-    <Navbar />
-    {children}
-    <Footer />
+    <CartProvider>
+      <Navbar />
+      {children}
+      <Footer />
+    </CartProvider>
   </body>;
   return (
     <html lang="en">
