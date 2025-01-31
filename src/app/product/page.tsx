@@ -1,24 +1,13 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import sanityClient from "@sanity/client";
-import "tailwindcss/tailwind.css";
-
-// Initialize the Sanity client
-const sanity = sanityClient({
-  projectId: "xp3lnr3e",
-  dataset: "production",
-  apiVersion: "2025-01-15",
-  useCdn: true,
-});
-
-
+import { client } from "@/sanity/lib/client";
+import { useCart } from "@/context/Context"; // Import the useCart hook
 
 const ProductCard: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [cart, setCart] = useState<Product[]>([]);
+  const [products, setProducts] = useState<any[]>([]);
+  const { cart, addToCart } = useCart(); // Get cart and addToCart from context
 
-  // Fetch products from the Sanity API
   const fetchProducts = async () => {
     try {
       const query = `
@@ -34,16 +23,11 @@ const ProductCard: React.FC = () => {
           "imageUrl": image.asset->url
         }
       `;
-      const data = await sanity.fetch(query);
+      const data = await client.fetch(query);
       setProducts(data);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
-  };
-
-  const addToCart = (product: Product) => {
-    setCart((prevCart) => [...prevCart, product]);
-    alert(`${product.name} has been added to the cart`);
   };
 
   useEffect(() => {
@@ -68,13 +52,12 @@ const ProductCard: React.FC = () => {
             />
             <div className="mt-4 text-[#2A254B]">
               <h2 className="text-lg font-semibold">{product.name}</h2>
-              <p className="text-sm line-clamp-2 mt-2">{product.description}</p>
 
               {/* Display features */}
               {product.features && (
                 <ul className="mt-2 list-disc pl-5">
                   <h3 className="font-semibold">Features:</h3>
-                  {product.features.map((feature, index) => (
+                  {product.features.map((feature: any, index: number) => (
                     <li key={index} className="text-sm">
                       {feature}
                     </li>
@@ -99,7 +82,7 @@ const ProductCard: React.FC = () => {
               </div>
               <button
                 className="mt-4 w-full py-2 bg-blue-500 text-white rounded-md"
-                onClick={() => addToCart(product)}
+                onClick={() => addToCart(product)} // Add to cart functionality
               >
                 Add to Cart
               </button>
@@ -108,7 +91,6 @@ const ProductCard: React.FC = () => {
         ))}
       </div>
 
-      {/* Cart Summary */}
       <div className="mt-4 rounded-lg shadow-md p-6 bg-green-100">
         <h2 className="font-medium text-red-400">Cart Summary</h2>
         {cart.length > 0 ? (
@@ -145,11 +127,3 @@ const ProductCard: React.FC = () => {
 };
 
 export default ProductCard;
-
-
-
-
-
-
-
-

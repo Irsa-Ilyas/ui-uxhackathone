@@ -1,103 +1,118 @@
-import React from "react";
-import Image from "next/image";
-import Brand from "../../../components/brand";
-import Signupcontent from "../../../components/content";
+"use client";
+import React, { useState, useEffect } from "react";
+import { useCart } from "@/context/Context";
+import { useRouter } from "next/navigation";
 
-const Cart = () => {
+const CartPage: React.FC = () => {
+  const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const router = useRouter();
+
+  // Calculate the total price of the cart
+  useEffect(() => {
+    const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    setTotalPrice(total);
+  }, [cart]);
+
+  const handleQuantityChange = (id: string, quantity: string) => {
+    const parsedQuantity = Math.max(1, parseInt(quantity) || 1); // Ensure quantity is a number >= 1
+    updateQuantity(id, parsedQuantity);
+  };
+
+  const handleProceedToCheckout = () => {
+    // Store cart in localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+    router.push("/checkout");
+  };
+
+  if (cart.length === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 py-12">
+        <h2 className="text-3xl font-bold text-gray-800">Your cart is empty</h2>
+        <p className="mt-4 text-lg text-gray-500">Start shopping to add items to your cart!</p>
+      </div>
+    );
+  }
+
   return (
-    <div>
-      <div className="flex flex-col md:flex-row justify-between text-[#2A254B] min-h-screen">
-        <div className="md:w-1/2 flex justify-center">
-          <Image
-            src="/images/chair1.png"
-            alt="The Dandy Chair"
-            width={720}
-            height={750}
-            className="h-auto object-cover"
-          />
-        </div>
-        <div className="md:w-1/2 px-6 md:px-20 py-10 flex flex-col justify-center">
-          <h1 className="text-4xl font-bold mb-5">The Dandy Chair</h1>
-          <p className="text-2xl font-semibold mb-8">£250</p>
-          <p className="text-lg font-medium mb-4">Description</p>
-          <p className="text-base leading-relaxed mb-6">
-            A timeless design, with premium materials featured as one of our
-            most popular and iconic pieces. The Dandy chair is perfect for any
-            stylish living space with both vegan and detailed leather
-            upholstery.
-          </p>
-          <ul className="list-disc ml-6 mb-8">
-            <li>Premium material</li>
-            <li>Handmade upholstery</li>
-            <li>Quality timeless interior</li>
-          </ul>
-          <div className="mb-6">
-            <h2 className="text-lg font-semibold mb-4">Dimensions</h2>
-            <div className="grid grid-cols-3 gap-4">
-              <p className="leading-8">
-                <strong>Height:</strong> 110cm
-              </p>
-              <p className="leading-8">
-                <strong>Width:</strong> 75cm
-              </p>
-              <p className="leading-8">
-                <strong>Depth:</strong> 50cm
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center flex-wrap gap-4 mt-8 md:mt-16">
-            <label htmlFor="quantity" className="text-lg font-semibold">
-              Amount:
-            </label>
-            <input
-              type="number"
-              min="1"
-              defaultValue="1"
-              className="w-16 border rounded px-2 py-1 text-center"
-            />
-            <div className="flex justify-center">
-              <button className=" sm:w-auto px-6 py-3 sm:px-16 bg-[#2A254B] text-white rounded hover:bg-[#1e1b3a]">
-                Add to cart
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <h1 className="text-3xl font-semibold text-center text-[#2A254B] py-5">
-        You May Also Like
-      </h1>
+    <div className="bg-gray-50 min-h-screen py-12">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <h1 className="text-4xl font-extrabold text-[#2A254B] mb-6">Your Cart</h1>
 
-      <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6  py-6">
-        {[
-          "/images/chair1.png",
-          "/images/chair2.png",
-          "/images/chair3.png",
-          "/images/p3.png",
-        ].map((src, index) => (
-          <div key={index}>
-            <Image
-              src={src}
-              alt={`Product ${index + 1}`}
-              width={305}
-              height={375}
-              className="rounded object-cover w-full"
-            />
-            <div className="py-5 text-[#2A254B]">
-              <p className="text-lg font-medium">The Poplar suede sofa</p>
-              <p className="text-md pt-2 font-light">£980</p>
+        <div className="space-y-8">
+          {cart.map((item:any) => (
+            <div
+              key={item._id}
+              className="flex flex-col md:flex-row items-center justify-between bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-all duration-200"
+            >
+              <div className="flex items-center space-x-6">
+                <img
+                  src={item.imageUrl}
+                  alt={item.name}
+                  width={100}
+                  height={100}
+                  className="rounded-md object-cover"
+                />
+                <div>
+                  <p className="text-xl font-semibold text-[#2A254B]">{item.name}</p>
+                  <p className="text-sm text-gray-500">£{item.price}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-4 mt-4 md:mt-0">
+                <button
+                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                  className="px-4 py-2 rounded-full bg-[#F0F0F0] hover:bg-[#CAC6DA] text-[#2A254B] text-lg"
+                  disabled={item.quantity === 1}
+                >
+                  -
+                </button>
+                <input
+                  type="number"
+                  min="1"
+                  value={item.quantity}
+                  onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+                  className="w-16 text-center border-2 border-[#D1D5DB] rounded-lg py-2 text-lg font-medium text-[#2A254B] focus:outline-none focus:border-[#A78BFA]"
+                />
+                <button
+                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                  className="px-4 py-2 rounded-full bg-[#F0F0F0] hover:bg-[#CAC6DA] text-[#2A254B] text-lg"
+                >
+                  +
+                </button>
+
+                <button
+                  onClick={() => removeFromCart(item.id)}
+                  className="text-red-600 font-semibold hover:text-red-800 transition-all duration-200"
+                >
+                  Remove
+                </button>
+              </div>
             </div>
+          ))}
+
+          <div className="mt-8 flex flex-col md:flex-row items-center justify-between">
+            <p className="text-xl font-bold text-[#2A254B]">Total: £{totalPrice.toFixed(2)}</p>
+            <button
+              onClick={handleProceedToCheckout}
+              className="px-8 py-3 bg-[#2A254B] text-white font-semibold rounded-lg hover:bg-[#1E1B3D] transition-all duration-300 mt-4 md:mt-0"
+            >
+              Proceed to Checkout
+            </button>
           </div>
-        ))}
+
+          <div className="mt-4 text-center">
+            <button
+              onClick={clearCart}
+              className="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-all duration-200"
+            >
+              Clear Cart
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="w-full flex justify-center text-base text-[#2A254B] mt-8">
-        <button className="bg-[#F9F9F9] rounded px-8 py-4 hover:bg-[#CAC6DA]">
-          View Collection
-        </button>
-      </div>
-      <Brand />
-      <Signupcontent />
     </div>
   );
 };
 
-export default Cart;
+export default CartPage;
