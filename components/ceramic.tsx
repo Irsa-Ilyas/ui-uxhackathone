@@ -24,7 +24,7 @@ const Ceramic = ({ urlData }: any) => {
             </Link>
             <div className="py-5 text-[#2A254B] text-left">
               <p className="text-xl ">{item.name}</p>
-              <p className="text-base sm:text-lg pt-2">{item.price}</p>
+              <p className="text-base sm:text-lg pt-2">£{item.price}</p>
             </div>
           </div>
         ))}

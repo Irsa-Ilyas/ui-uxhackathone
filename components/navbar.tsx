@@ -40,7 +40,7 @@ const Navbar = () => {
               <Link href="/cart"><BsCart2 size={24} className="text-[#726E8D]"/></Link>
               </li>
               <li>
-              <Link href="/favourite"><FaRegHeart  size={24} className="text-[#726E8D]"/></Link>
+              <Link href="/wishlist"><FaRegHeart  size={24} className="text-[#726E8D]"/></Link>
               </li>
               
               <li>
@@ -85,7 +85,7 @@ const Navbar = () => {
               <Link href="/cart"><BsCart2 size={24}/></Link> 
               </li>
               <li>
-              <Link href="/favourite"><FaRegHeart  size={24}/></Link> 
+              <Link href="/wishlist"><FaRegHeart  size={24}/></Link> 
               </li>
               
               <li>
