@@ -7,6 +7,17 @@ import { AiOutlineUser } from "react-icons/ai";
 import { IoIosMenu, IoIosClose } from "react-icons/io";
 import Link from "next/link";
 import { FaRegHeart } from "react-icons/fa6";
+import {
+ 
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+
+ 
+
+} from '@clerk/nextjs';
+
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,7 +35,7 @@ const Navbar = () => {
           <IoSearch size={24} className="" />
 
           <h1 className="text-[#2A254B] text-xl font-bold">Avion</h1>
-
+ 
           <div className="hidden lg:block">
             <ul className="flex gap-6 items-center">
               <li>
@@ -42,10 +53,13 @@ const Navbar = () => {
               <li>
               <Link href="/favourite"><FaRegHeart  size={24} className="text-[#726E8D]"/></Link>
               </li>
+              <SignedOut >
+            <SignInButton className="bg-[#2A254B] text-white text-2xl px-3 py-2 rounded" />
+          </SignedOut>
               
-              <li>
-                <AiOutlineUser size={24} className="text-[#726E8D]" />
-              </li>
+              <SignedIn>
+            <UserButton  />
+          </SignedIn>
             </ul>
           </div>
 

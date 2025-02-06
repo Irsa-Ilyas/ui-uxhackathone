@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import {ClerkProvider} from '@clerk/nextjs'
 
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
@@ -23,18 +24,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  const newLocal = <body
-    className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[1440px] mx-auto`}>
-    <Navbar />
-    {children}
-    <Footer />
-  </body>;
+}) {
   return (
-    <html lang="en">
-      {newLocal}
+    <ClerkProvider>
+    <html lang="en" className="overflow-x-hidden">
+      <body className="overflow-x-hidden">
+    
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
-  );
+  </ClerkProvider>
+)
 }
+    
+

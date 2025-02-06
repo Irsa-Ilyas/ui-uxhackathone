@@ -53,12 +53,21 @@ const Footer = () => {
             <li className="text-base font-semibold">Join our mailing list</li>
             <li>
               <div className="flex items-center">
+        
+                <label htmlFor="email" className="sr-only">
+                  Email Address
+                </label>
                 <input
-                  type="text"
+                  id="email"
+                  type="email"
                   placeholder="your@gmail.com"
                   className="px-4 py-3 bg-[#494365] text-white placeholder:text-[#d1d1e9] rounded-l-md focus:outline-none"
+                  aria-label="Email input for newsletter sign-up"
                 />
-                <button className="px-5 py-3 lg:py-0  bg-white text-[#4e4d93] rounded-r-md hover:bg-[#d1d1e9]">
+                <button
+                  aria-label="Submit newsletter sign-up"
+                  className="px-5 py-3 lg:py-0  bg-white text-[#4e4d93] rounded-r-md hover:bg-[#d1d1e9]"
+                >
                   Sign Up
                 </button>
               </div>
@@ -70,6 +79,7 @@ const Footer = () => {
       <div className="max-w-[1273px] mx-auto flex flex-col md:flex-row justify-between items-center mt-10 gap-4 text-sm">
         <p>Copyright 2022 Avion LTD</p>
         <div className="flex gap-4 text-2xl">
+      
           <span aria-label="LinkedIn">
             <LiaLinkedinIn />
           </span>

@@ -116,15 +116,15 @@ export const product = defineType({
     title: "Product",
     type: "document",
     fields: [
-        defineField({
-            name:"category",
-            title:"Category",
-            type:"reference",
-            to:[{
-                type:"category"
-            }]
-        }
-        ),
+        // defineField({
+        //     name:"category",
+        //     title:"Category",
+        //     type:"reference",
+        //     to:[{
+        //         type:"category"
+        //     }]
+        // }
+        // ),
         defineField({
             name: "name",
             title: "Title",
@@ -170,6 +170,12 @@ export const product = defineType({
             description: 'Detailed description of the product',
           }),
           defineField({
+            name: 'inventory',
+            title: 'inventory',
+            type: 'number',
+    
+          }),
+          defineField({
             name: 'features',
             title: 'Features',
             type: 'array',
@@ -181,9 +187,9 @@ export const product = defineType({
             title: 'Dimensions',
             type: 'object',
             fields: [
-              { name: 'height', title: 'Height', type: 'string' },
-              { name: 'width', title: 'Width', type: 'string' },
-              { name: 'depth', title: 'Depth', type: 'string' },
+              { name: 'height', title: 'Height', type: 'number' },
+              { name: 'width', title: 'Width', type: 'number' },
+              { name: 'depth', title: 'Depth', type: 'number' },
             ],
             description: 'Dimensions of the product',
           }),

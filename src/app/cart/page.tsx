@@ -1,103 +1,133 @@
-import React from "react";
-import Image from "next/image";
-import Brand from "../../../components/brand";
-import Signupcontent from "../../../components/content";
+"use client"
+import React, { useEffect, useState } from 'react'
+import { Product } from '../../../types/producttype'
+import { getCartItems, updateCartQuantity, removeFromCart } from '../actions/acions'
+import Image from 'next/image'
+import { urlFor } from '@/sanity/lib/image'
+import { useRouter } from "next/navigation"
 
-const Cart = () => {
+const CartPage = () => {
+  const [cartItems, setCartItems] = useState<Product[]>([])
+  const router = useRouter();
+
+  useEffect(() => {
+    
+    const fetchCart = () => {
+      const items = getCartItems()
+      setCartItems(items)
+    }
+    fetchCart()
+  }, [])
+
+  const refreshCart = () => {
+    setCartItems(getCartItems()) 
+  }
+
+  const handleRemove = (id: string) => {
+    const isConfirmed = window.confirm("Are you sure? You won't  remove this item!")
+    if (isConfirmed) {
+      removeFromCart(id)
+      refreshCart() 
+      alert("Item has been removed from your cart.")
+    }
+  }
+
+
+  const handleIncrement = (id: string) => {
+    setCartItems((prevCart) =>
+      prevCart.map((item) =>
+        item._id === id ? { ...item, inventory: item.inventory + 1 } : item
+      )
+    )
+    updateCartQuantity(id, cartItems.find((item) => item._id === id)?.inventory! + 1)
+  }
+
+  const handleDecrement = (id: string) => {
+    setCartItems((prevCart) =>
+      prevCart.map((item) =>
+        item._id === id && item.inventory > 1
+          ? { ...item, inventory: item.inventory - 1 }
+          : item
+      )
+    )
+    updateCartQuantity(id, cartItems.find((item) => item._id === id)?.inventory! - 1)
+  }
+
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => total + item.price * item.inventory, 0)
+  }
+
+  const handleProceed = () => {
+    const isConfirmed = window.confirm("Do you want to proceed with your order?")
+    if (isConfirmed) {
+      alert("Your order has been successfully processed!")
+      router.push("/checkout")
+      setCartItems([]) 
+    }
+  }
+
   return (
-    <div>
-      <div className="flex flex-col md:flex-row justify-between text-[#2A254B] min-h-screen">
-        <div className="md:w-1/2 flex justify-center">
-          <Image
-            src="/images/chair1.png"
-            alt="The Dandy Chair"
-            width={720}
-            height={750}
-            className="h-auto object-cover"
-          />
-        </div>
-        <div className="md:w-1/2 px-6 md:px-20 py-10 flex flex-col justify-center">
-          <h1 className="text-4xl font-bold mb-5">The Dandy Chair</h1>
-          <p className="text-2xl font-semibold mb-8">£250</p>
-          <p className="text-lg font-medium mb-4">Description</p>
-          <p className="text-base leading-relaxed mb-6">
-            A timeless design, with premium materials featured as one of our
-            most popular and iconic pieces. The Dandy chair is perfect for any
-            stylish living space with both vegan and detailed leather
-            upholstery.
-          </p>
-          <ul className="list-disc ml-6 mb-8">
-            <li>Premium material</li>
-            <li>Handmade upholstery</li>
-            <li>Quality timeless interior</li>
-          </ul>
-          <div className="mb-6">
-            <h2 className="text-lg font-semibold mb-4">Dimensions</h2>
-            <div className="grid grid-cols-3 gap-4">
-              <p className="leading-8">
-                <strong>Height:</strong> 110cm
-              </p>
-              <p className="leading-8">
-                <strong>Width:</strong> 75cm
-              </p>
-              <p className="leading-8">
-                <strong>Depth:</strong> 50cm
-              </p>
+    <div className="container mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6 text-center">Your Cart</h1>
+      {cartItems.length > 0 ? (
+        <div className="space-y-6">
+          {cartItems.map((item) => (
+            <div key={item._id} className="flex justify-between items-center bg-white p-4 shadow-md rounded-lg">
+              <div className="flex items-center">
+                {item.image && (
+                  <Image
+                    src={urlFor(item.image).url()} 
+                    alt={item.name}
+                    width={100}
+                    height={100}
+                    className="object-cover rounded-md mr-4"
+                  />
+                )}
+                <div>
+                  <h2 className="text-lg font-semibold">{item.name}</h2>
+                  <p className="text-gray-500">Price: ${item.price}</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => handleDecrement(item._id)}
+                  className="bg-gray-300 p-2 rounded-full text-xl"
+                >
+                  -
+                </button>
+                <span>{item.inventory}</span>
+                <button
+                  onClick={() => handleIncrement(item._id)}
+                  className="bg-gray-300 p-2 rounded-full text-xl"
+                >
+                  +
+                </button>
+                <button
+                  onClick={() => handleRemove(item._id)}
+                  className="bg-red-500 text-white p-2 rounded-md"
+                >
+                  Remove
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center flex-wrap gap-4 mt-8 md:mt-16">
-            <label htmlFor="quantity" className="text-lg font-semibold">
-              Amount:
-            </label>
-            <input
-              type="number"
-              min="1"
-              defaultValue="1"
-              className="w-16 border rounded px-2 py-1 text-center"
-            />
-            <div className="flex justify-center">
-              <button className=" sm:w-auto px-6 py-3 sm:px-16 bg-[#2A254B] text-white rounded hover:bg-[#1e1b3a]">
-                Add to cart
-              </button>
-            </div>
+          ))}
+          <div className="flex justify-between items-center mt-6">
+            <h2 className="text-2xl font-bold">Total: ${calculateTotal()}</h2>
+            <button
+              onClick={handleProceed}
+              className="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600"
+            >
+              Proceed to Checkout
+            </button>
           </div>
         </div>
-      </div>
-      <h1 className="text-3xl font-semibold text-center text-[#2A254B] py-5">
-        You May Also Like
-      </h1>
-
-      <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6  py-6">
-        {[
-          "/images/chair1.png",
-          "/images/chair2.png",
-          "/images/chair3.png",
-          "/images/p3.png",
-        ].map((src, index) => (
-          <div key={index}>
-            <Image
-              src={src}
-              alt={`Product ${index + 1}`}
-              width={305}
-              height={375}
-              className="rounded object-cover w-full"
-            />
-            <div className="py-5 text-[#2A254B]">
-              <p className="text-lg font-medium">The Poplar suede sofa</p>
-              <p className="text-md pt-2 font-light">£980</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="w-full flex justify-center text-base text-[#2A254B] mt-8">
-        <button className="bg-[#F9F9F9] rounded px-8 py-4 hover:bg-[#CAC6DA]">
-          View Collection
-        </button>
-      </div>
-      <Brand />
-      <Signupcontent />
+      ) : (
+        <p className="text-center text-gray-500">Your cart is empty.</p>
+      )}
     </div>
-  );
-};
+  )
+}
 
-export default Cart;
+export default CartPage
+
+
