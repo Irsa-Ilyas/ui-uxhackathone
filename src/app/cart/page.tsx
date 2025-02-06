@@ -1,46 +1,54 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import { Product } from '../../../types/producttype'
-import { getCartItems, updateCartQuantity, removeFromCart } from '../actions/acions'
-import Image from 'next/image'
-import { urlFor } from '@/sanity/lib/image'
-import { useRouter } from "next/navigation"
+"use client";
+import React, { useEffect, useState } from "react";
+import { Product } from "../../../types/producttype";
+import {
+  getCartItems,
+  updateCartQuantity,
+  removeFromCart,
+} from "../actions/acions";
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
+import { useRouter } from "next/navigation";
 
 const CartPage = () => {
-  const [cartItems, setCartItems] = useState<Product[]>([])
+  const [cartItems, setCartItems] = useState<Product[]>([]);
   const router = useRouter();
 
   useEffect(() => {
-    
     const fetchCart = () => {
-      const items = getCartItems()
-      setCartItems(items)
-    }
-    fetchCart()
-  }, [])
+      const items = getCartItems();
+      setCartItems(items);
+    };
+    fetchCart();
+  }, []);
 
   const refreshCart = () => {
-    setCartItems(getCartItems()) 
-  }
+    setCartItems(getCartItems());
+  };
 
   const handleRemove = (id: string) => {
-    const isConfirmed = window.confirm("Are you sure? You won't  remove this item!")
+    const isConfirmed = window.confirm(
+      "Are you sure? You want to remove this item!"
+    );
     if (isConfirmed) {
-      removeFromCart(id)
-      refreshCart() 
-      alert("Item has been removed from your cart.")
+      removeFromCart(id);
+      refreshCart();
+      alert("Item has been removed from your cart.");
     }
-  }
-
+  };
 
   const handleIncrement = (id: string) => {
     setCartItems((prevCart) =>
       prevCart.map((item) =>
         item._id === id ? { ...item, inventory: item.inventory + 1 } : item
       )
-    )
-    updateCartQuantity(id, cartItems.find((item) => item._id === id)?.inventory! + 1)
-  }
+    );
+
+    const foundItem = cartItems.find((item) => item._id === id);
+    if (foundItem) {
+      updateCartQuantity(id, foundItem.inventory + 1);
+    }
+  };
 
   const handleDecrement = (id: string) => {
     setCartItems((prevCart) =>
@@ -49,22 +57,31 @@ const CartPage = () => {
           ? { ...item, inventory: item.inventory - 1 }
           : item
       )
-    )
-    updateCartQuantity(id, cartItems.find((item) => item._id === id)?.inventory! - 1)
-  }
+    );
+
+    const foundItem = cartItems.find((item) => item._id === id);
+    if (foundItem && foundItem.inventory > 1) {
+      updateCartQuantity(id, foundItem.inventory - 1);
+    }
+  };
 
   const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.inventory, 0)
-  }
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.inventory,
+      0
+    );
+  };
 
   const handleProceed = () => {
-    const isConfirmed = window.confirm("Do you want to proceed with your order?")
+    const isConfirmed = window.confirm(
+      "Do you want to proceed with your order?"
+    );
     if (isConfirmed) {
-      alert("Your order has been successfully processed!")
-      router.push("/checkout")
-      setCartItems([]) 
+      alert("Your order has been successfully processed!");
+      router.push("/checkout");
+      setCartItems([]);
     }
-  }
+  };
 
   return (
     <div className="container mx-auto p-6">
@@ -72,11 +89,14 @@ const CartPage = () => {
       {cartItems.length > 0 ? (
         <div className="space-y-6">
           {cartItems.map((item) => (
-            <div key={item._id} className="flex justify-between items-center bg-white p-4 shadow-md rounded-lg">
+            <div
+              key={item._id}
+              className="flex justify-between items-center bg-white p-4 shadow-md rounded-lg"
+            >
               <div className="flex items-center">
                 {item.image && (
                   <Image
-                    src={urlFor(item.image).url()} 
+                    src={urlFor(item.image).url()}
                     alt={item.name}
                     width={100}
                     height={100}
@@ -125,9 +145,7 @@ const CartPage = () => {
         <p className="text-center text-gray-500">Your cart is empty.</p>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default CartPage
-
-
+export default CartPage;

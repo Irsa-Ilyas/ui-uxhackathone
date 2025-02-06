@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import {ClerkProvider} from '@clerk/nextjs'
-
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,7 +29,8 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-    <html lang="en" className="overflow-x-hidden">
+ <html lang="en" className={`${geistSans.variable} ${geistMono.variable} overflow-x-hidden`}>
+
       <body className="overflow-x-hidden">
     
         <Navbar />

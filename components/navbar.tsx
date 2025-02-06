@@ -54,7 +54,9 @@ const Navbar = () => {
               <Link href="/favourite"><FaRegHeart  size={24} className="text-[#726E8D]"/></Link>
               </li>
               <SignedOut >
-            <SignInButton className="bg-[#2A254B] text-white text-2xl px-3 py-2 rounded" />
+              <div className="bg-[#2A254B] text-white text-2xl px-3 py-2 rounded">
+    <SignInButton />
+  </div>
           </SignedOut>
               
               <SignedIn>
