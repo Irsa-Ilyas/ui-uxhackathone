@@ -37,7 +37,8 @@ const MyProduct = () => {
                 <Image
                   src={urlFor(productItem.image).url()}
                   alt={productItem.name}
-                  layout="fill"
+                  height={300}
+                  width={300}
                   objectFit="cover"
                   className="w-full h-full object-cover"
                 />
