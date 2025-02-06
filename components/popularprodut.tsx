@@ -48,7 +48,7 @@ const PopularProduct = () => {
             width={340}
             height={375}
             alt="The Dandy Chair"
-            layout="responsive" // Make image responsive
+     
             priority
           />
           <div className="py-5 text-[#2A254B]">

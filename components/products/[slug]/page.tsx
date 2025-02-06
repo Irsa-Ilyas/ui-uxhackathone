@@ -81,7 +81,8 @@ async function getProduct(slug: string): Promise<Product | null> {
 
 export default async function ProductPage({ params }: ProductProps) {
   const { slug } = await params;  // Destructuring slug from the awaited params
-  const product = await getProduct(slug);  // Get the product based on the slug
+  const product = await getProduct(slug);  
+   // Get the product based on the slug
   
   // Check if the product exists
   if (!product) {
@@ -97,7 +98,7 @@ export default async function ProductPage({ params }: ProductProps) {
               <Image
                 src={urlFor(product.image).url()}
                 alt={product.name}
-                layout="fill"
+        
                 objectFit="cover"
                 className="w-full h-full object-cover"
               />
