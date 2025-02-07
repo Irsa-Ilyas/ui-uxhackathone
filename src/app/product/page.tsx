@@ -6,32 +6,59 @@ import { useCart } from "@/context/Context";
 import Link from "next/link";
 import { FaRegHeart } from "react-icons/fa";
 
-const ProductCard: React.FC = () => {
-  const [products, setProducts] = useState<any[]>([]);
-  const { addToCart, addToWishlist } = useCart(); 
-
-  const fetchProducts = async () => {
-    try {
-      const query = `
-        *[_type == "product"]{
-          _id,
-          name,
-          slug,
-          price,
-          description,
-          features,
-          dimensions,
-          "imageUrl": image.asset->url
-        }
-      `;
-      const data = await client.fetch(query);
-      setProducts(data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
+// ✅ Define Product Type
+interface Product {
+  _id: string;
+  name: string;
+  slug?: string;
+  price: number;
+  description: string;
+  category: string;
+  features: string[];
+  dimensions?: {
+    height?: number;
+    width?: number;
+    depth?: number;
   };
+  imageUrl: string; // ✅ Always a string
+}
+
+const ProductCard: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const { addToCart, addToWishlist } = useCart();
 
   useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const query = `
+          *[_type == "product"]{
+            _id,
+            name,
+            slug,
+            price,
+            description,
+            category,
+            features,
+            dimensions,
+            "imageUrl": image.asset->url
+          }
+        `;
+        const data = await client.fetch(query);
+
+        // ✅ Ensure `imageUrl` is always a string
+        const formattedData: Product[] = data.map((product: Product) => ({
+          ...product,
+          description: product.description ?? "",
+          features: product.features ?? [],
+          imageUrl: product.imageUrl ?? "/fallback-image.jpg", // ✅ Default fallback
+        }));
+
+        setProducts(formattedData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
     fetchProducts();
   }, []);
 
@@ -46,7 +73,7 @@ const ProductCard: React.FC = () => {
           <div key={product._id} className="bg-white shadow-md rounded-lg p-4">
             <Link href={`/${product._id}`}>
               <Image
-                src={product.imageUrl || "/fallback-image.jpg"}
+                src={product.imageUrl}
                 alt={product.name}
                 width={300}
                 height={300}
@@ -57,10 +84,10 @@ const ProductCard: React.FC = () => {
               {product.name}
             </h2>
 
-            {product.features && (
+            {product.features.length > 0 && (
               <ul className="mt-2 list-disc pl-5 text-sm">
                 <h3 className="font-semibold">Features:</h3>
-                {product.features.map((feature: any, index: any) => (
+                {product.features.map((feature, index) => (
                   <li key={index}>{feature}</li>
                 ))}
               </ul>
@@ -70,9 +97,9 @@ const ProductCard: React.FC = () => {
               <div className="mt-2 text-sm">
                 <h3 className="font-semibold">Dimensions:</h3>
                 <p>
-                  Height: {product.dimensions.height || "N/A"} <br />
-                  Width: {product.dimensions.width || "N/A"} <br />
-                  Depth: {product.dimensions.depth || "N/A"}
+                  Height: {product.dimensions?.height ?? "N/A"} <br />
+                  Width: {product.dimensions?.width ?? "N/A"} <br />
+                  Depth: {product.dimensions?.depth ?? "N/A"}
                 </p>
               </div>
             )}
@@ -82,6 +109,7 @@ const ProductCard: React.FC = () => {
                 ${product.price.toFixed(2)}
               </p>
             </div>
+
             <div className="flex flex-wrap w-full justify-between items-center gap-2">
               <button
                 className="w-2/3 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition"
@@ -89,7 +117,8 @@ const ProductCard: React.FC = () => {
               >
                 Add to Cart
               </button>
-              <FaRegHeart size={40}
+              <FaRegHeart
+                size={40}
                 className="w-1/4 py-2 cursor-pointer bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition"
                 onClick={() => addToWishlist(product)}
               />
@@ -97,8 +126,7 @@ const ProductCard: React.FC = () => {
           </div>
         ))}
       </div>
-    </div >
-
+    </div>
   );
 };
 
