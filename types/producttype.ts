@@ -1,15 +1,35 @@
-export interface IProduct {
+export interface Product {
+  slug: {
+    _type: "slug";
+    current: string;
+  };  
+  image: {
+    _type: "image";
+    asset: {
+      _ref: string;
+      _type: "reference";
+    };
+  }[]; // Assuming image is an array, update if needed
+  
   _id: string;
   name: string;
-  // // slug: { current: string };
   price: number;
-  // // quantity: number;
-  // // description?: string;
-  // // imageUrl?: string;
-  // // features?: string[]; // New field
-  // // dimensions?: {
-  // //   height?: string;
-  // //   width?: string;
-  // //   depth?: string;
-  // }; // New field
+  _type: "product";
+  description?: string;
+  
+  imageUrl?: {
+    _type: "image";
+    asset: {
+      _ref: string;
+      _type: "reference";
+    };
+  };
+  
+  dimensions?: {
+    height: string;
+    width: string;
+    depth: string;
+  };
+  
+  inventory: number;
 }
