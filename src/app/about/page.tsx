@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaCanadianMapleLeaf, FaRegCheckCircle } from "react-icons/fa";
@@ -10,50 +9,49 @@ const About = () => {
     <div className="max-w-[1440px] mx-auto">
     
     <div className="w-full flex justify-center items-center px-4">
-  <div className="max-w-[1250px] w-full mx-auto flex lg:flex-row flex-col lg:gap-0 gap-[40px] items-center justify-between mt-[88px] lg:mb-[89px] mb-[32px]">
-    <h1 className="text-4xl lg:text-left py-10 text-center  leading-relaxed">
-      A brand built on the love of craftsmanship,<br/> quality, and outstanding customer service
-    </h1>
-          <button className=" text-[#2A254B] bg-[#F9F9F9] rounded  py-4 hover:bg-[#CAC6DA] px-8 mb-4">
-       View Our Products
-          </button>
-  </div>
-</div>
-
-
-      <div className="w-full flex justify-center px-4  lg:py-[60px] pb-[32px]">
-        <div className="w-full  flex lg:flex-row lg:gap-4 gap-6 flex-col justify-center">
-        <div className=" flex flex-col justify-around text-center p-4 bg-[#2A254B] w-full lg:w-[55%] ">
-        <div className="">
-          <h2 className="text-white text-4xl mt-10 ">
-          It started with a small idea
-          </h2>
-          <p className="text-white  text-lg sm:mt-10 mb-10">
-          A global brand with local beginnings, our story begain in a <br />small studio in South London in early 2014
-            
-          </p>
-          
-        </div>
-
-        <div className="w-full hidden lg:block  ">
-        <button className="bg-[#494365] mt-10 text-white font-medium px-8 py-4 rounded opacity-75">
-            View collection
-          </button>
-        </div>
+      <div className="max-w-[1250px] w-full mx-auto flex lg:flex-row flex-col lg:gap-0 gap-[40px] items-center justify-between mt-[88px] lg:mb-[89px] mb-[32px]">
+        <h1 className="text-4xl lg:text-left py-10 text-center  leading-relaxed">
+          A brand built on the love of craftsmanship,<br /> quality, and outstanding customer service
+        </h1>
+        <button className=" text-[#2A254B] bg-[#F9F9F9] rounded py-4 hover:bg-[#CAC6DA] px-8 mb-4">
+          View Our Products
+        </button>
       </div>
-          <div className="flex-1">
-            <Image
-              src="/images/about1.png"
-              alt="Sofa Image"
-              width={630}
-              height={478}
-              className="w-full lg:h-[478px]"
-            />
+    </div>
+
+    <div className="w-full flex justify-center px-4  lg:py-[60px] pb-[32px]">
+      <div className="w-full  flex lg:flex-row lg:gap-4 gap-6 flex-col justify-center">
+        <div className=" flex flex-col justify-around text-center p-4 bg-[#2A254B] w-full lg:w-[55%] ">
+          <div className="">
+            <h2 className="text-white text-4xl mt-10 ">
+              It started with a small idea
+            </h2>
+            <p className="text-white text-lg sm:mt-10 mb-10">
+              A global brand with local beginnings, our story began in a <br />
+              small studio in South London in early 2014
+            </p>
+          </div>
+
+          <div className="w-full hidden lg:block ">
+            <button className="bg-[#494365] mt-10 text-white font-medium px-8 py-4 rounded opacity-75">
+              View collection
+            </button>
           </div>
         </div>
-      </div>
 
-      <div className="flex flex-col md:flex-row justify-between bg-white w-full max-w-[1440px] mx-auto">
+        <div className="flex-1">
+          <Image
+            src="/images/about1.png"
+            alt="Sofa Image"
+            width={630}
+            height={478}
+            className="w-full lg:h-[478px]"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div className="flex flex-col md:flex-row justify-between bg-white w-full max-w-[1440px] mx-auto">
       <div className="flex flex-col justify-around w-full md:w-2/4 px-3">
         <div className="py-8">
           <h2 className="text-2xl text-[#2A254B] leading-relaxed">
@@ -90,66 +88,66 @@ const About = () => {
         />
       </div>
     </div>
-      <div className="w-full flex justify-center px-4 text-[#2A254B]">
-        <div className="w-full max-w-7xl text-darkPurple pt-[60px] pb-[80px]">
-          <h1 className="sm:text-center text-left text-3xl mb-[51px]">
-            What makes our brand different
-          </h1>
-          <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-[22px] gap-[26px]">
-            <div className="flex items-center justify-between bg-[#F9F9F9] lg:p-12 p-6">
-              <div>
-                <span className="text-2xl">
-                  <TbTruckDelivery />
-                </span>
-                <h3 className="mb-2 text-xl">Next day as standard</h3>
-                <h3>
-                  Order before 3pm and get your order the next day as standard.
-                </h3>
-              </div>
+
+    <div className="w-full flex justify-center px-4 text-[#2A254B]">
+      <div className="w-full max-w-7xl text-darkPurple pt-[60px] pb-[80px]">
+        <h1 className="sm:text-center text-left text-3xl mb-[51px]">
+          What makes our brand different
+        </h1>
+        <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-[22px] gap-[26px]">
+          <div className="flex items-center justify-between bg-[#F9F9F9] lg:p-12 p-6">
+            <div>
+              <span className="text-2xl">
+                <TbTruckDelivery />
+              </span>
+              <h3 className="mb-2 text-xl">Next day as standard</h3>
+              <h3>
+                Order before 3pm and get your order the next day as standard.
+              </h3>
             </div>
-            <div className="flex items-center justify-between bg-[#F9F9F9] lg:p-12 p-6">
-              <div>
-                <span className="text-2xl">
-                  <FaRegCheckCircle />
-                </span>
-                <h3 className="mb-2 text-xl">Made by true artisans</h3>
-                <h3>
-                  Handmade crafted goods made with real passion and
-                  craftmanship.
-                </h3>
-              </div>
+          </div>
+          <div className="flex items-center justify-between bg-[#F9F9F9] lg:p-12 p-6">
+            <div>
+              <span className="text-2xl">
+                <FaRegCheckCircle />
+              </span>
+              <h3 className="mb-2 text-xl">Made by true artisans</h3>
+              <h3>
+                Handmade crafted goods made with real passion and
+                craftsmanship.
+              </h3>
             </div>
-            <div className="flex items-center justify-between bg-[#F9F9F9] lg:p-12 p-6">
-              <div>
-                <span className="text-2xl">
-                  <PiDeviceMobile />
-                </span>
-                <h3 className="mb-2 text-xl">Unbeatable prices</h3>
-                <h3>
-                  For our materials and quality, you won&apos;t find better
-                  prices anywhere.
-                </h3>
-              </div>
+          </div>
+          <div className="flex items-center justify-between bg-[#F9F9F9] lg:p-12 p-6">
+            <div>
+              <span className="text-2xl">
+                <PiDeviceMobile />
+              </span>
+              <h3 className="mb-2 text-xl">Unbeatable prices</h3>
+              <h3>
+                For our materials and quality, you won’t find better
+                prices anywhere.
+              </h3>
             </div>
-            <div className="flex items-center justify-between bg-[#F9F9F9] lg:p-12 p-6">
-              <div>
-                <span className="text-2xl">
-                  <FaCanadianMapleLeaf />
-                </span>
-                <h3 className="mb-2 text-xl">Recycled packaging</h3>
-                <h3>
-                  We use 100% recycled packaging to ensure our footprint is
-                  manageable.
-                </h3>
-              </div>
+          </div>
+          <div className="flex items-center justify-between bg-[#F9F9F9] lg:p-12 p-6">
+            <div>
+              <span className="text-2xl">
+                <FaCanadianMapleLeaf />
+              </span>
+              <h3 className="mb-2 text-xl">Recycled packaging</h3>
+              <h3>
+                We use 100% recycled packaging to ensure our footprint is
+                manageable.
+              </h3>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-{/*  */}
-<Signupcontent/>
-      <div />
+    <Signupcontent />
+
     </div>
   );
 };
