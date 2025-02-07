@@ -64,10 +64,14 @@ const Footer = () => {
                   className="px-4 py-3 bg-[#494365] text-white placeholder:text-[#d1d1e9] rounded-l-md focus:outline-none"
                   aria-label="Email input for newsletter sign-up"
                 />
+
+                <button className="px-3 py-3 lg:py-0  bg-white text-[#4e4d93] rounded-r-md hover:bg-[#d1d1e9]">
+
                 <button
                   aria-label="Submit newsletter sign-up"
                   className="px-5 py-3 lg:py-0  bg-white text-[#4e4d93] rounded-r-md hover:bg-[#d1d1e9]"
                 >
+
                   Sign Up
                 </button>
               </div>
